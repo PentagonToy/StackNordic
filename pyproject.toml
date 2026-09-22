@@ -1,0 +1,30 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "stacknordic"
+version = "0.1.0"
+description = "OpenFOAM data preparation and reduction for DNS, LES, and machine learning"
+readme = "README.md"
+requires-python = ">=3.11,<3.13"
+license = "GPL-3.0-only"
+authors = [{ name = "Hanseul Kang", email = "hanseul.kang@aalto.fi" }]
+dependencies = [
+    "cantera>=3.1,<4",
+    "h5py>=3.12,<4",
+    "numpy>=2,<3",
+    "onsaemiro>=1.0.5",
+    "scipy>=1.14,<2",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/stacknordic"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
