@@ -1,5 +1,7 @@
 # Documentation
 
+StackNordic owns reconstruction and stored-data preparation. It can be used independently or alongside [FoamNordic](https://github.com/PentagonToy/FoamNordic), which owns OpenFOAM execution and resident model coupling.
+
 ## API
 
 - [OpenFOAM runtime](api/openfoam.md)

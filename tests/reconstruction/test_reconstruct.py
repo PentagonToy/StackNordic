@@ -216,7 +216,7 @@ def test_runtime_preflight_reports_missing_executable(monkeypatch: pytest.Monkey
 
 
 def test_minus_one_uses_available_cpu_limit(monkeypatch: pytest.MonkeyPatch) -> None:
-    monkeypatch.setattr("stacknordic.resources.os.cpu_count", lambda: 32)
+    monkeypatch.setattr("stacknordic.resources.available_cpus", lambda: 32)
 
     assert workers(-1, 20) == 20
     assert workers(-1, 2) == 2

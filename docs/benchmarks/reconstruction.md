@@ -25,6 +25,17 @@ The Taylor–Green vortex comparison alternated direct `reconstructPar` and `cas
 
 The StackNordic reconstruction ratio was `1.267`; the end-to-end ratio was `1.774` when Python start-up, package import, case inspection, runtime preflight, compatibility staging and cleanup were included. All fourteen measured outputs had the same SHA-256 digest and were therefore byte-identical.
 
+## Command-line validation
+
+The installed `stacknordic reconstruct` command was validated on Roihu with OpenFOAM.com v2512. The 32-directory Taylor–Green vortex case reconstructed `U` at `0.011574954`. Direct and StackNordic runs were alternated after one warm-up per path.
+
+| Path | End-to-end wall | Runs | Output parity |
+| --- | ---: | ---: | --- |
+| Direct `reconstructPar` | 2.178 ± 0.020 s | 7 | SHA-256 identical |
+| `stacknordic reconstruct` | 4.062 ± 0.035 s | 7 | SHA-256 identical |
+
+The CLI ratio was `1.864`. Its end-to-end time includes Python start-up, package import, runtime preflight, isolated case staging and cleanup. Roihu job `1569534` performed the measurement on one interactive CPU node; the raw CSV and summary are retained with the project validation artefacts.
+
 ## Cross-distribution reconstruction
 
 | Runtime | Reconstruction wall | Slurm wall | Peak RSS | Compatibility action |

@@ -51,3 +51,26 @@ Each worker runs one `reconstructPar -time ...` process across every processor d
 Existing root time directories are preserved. Incomplete processor times are excluded, and an explicitly requested incomplete time raises an error. Each worker uses an isolated runtime-compatible case view and moves only a completed time into the output directory. When a Foundation decomposition is read by an OpenFOAM.com runtime, StackNordic supplies the missing ESI boundary addressing inside that temporary view. Temporary views are removed after success or failure.
 
 `times=None` selects every complete time. A tuple selects an inclusive range, while a list selects exactly its members. This distinction applies consistently to reconstruction and dataset export.
+
+## Command line
+
+Activate the Python environment and OpenFOAM runtime before running the command. The current directory is used as the case by default.
+
+```console
+stacknordic reconstruct --n-jobs -1 --progress
+```
+
+Select exact times and fields:
+
+```console
+stacknordic reconstruct \
+    --case-dir cases/TaylorGreenVortex3D \
+    --output-dir output/TaylorGreenVortex3D \
+    --time 0.05 \
+    --time 0.1 \
+    --fields U p nut \
+    --n-jobs 4 \
+    --progress
+```
+
+Use `--time-range START END` for an inclusive range. The OpenFOAM-style alias `stacknordic -reconstructPar` accepts the same options.

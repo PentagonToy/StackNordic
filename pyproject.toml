@@ -10,12 +10,41 @@ readme = "README.md"
 requires-python = ">=3.11,<3.13"
 license = "GPL-3.0-only"
 authors = [{ name = "Hanseul Kang", email = "hanseul.kang@aalto.fi" }]
+keywords = ["OpenFOAM", "CFD", "DNS", "LES", "scientific computing"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Operating System :: MacOS :: MacOS X",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering",
+]
 dependencies = [
     "cantera>=3.1,<4",
     "h5py>=3.12,<4",
     "numpy>=2,<3",
     "onsaemiro>=1.0.5",
     "scipy>=1.14,<2",
+]
+
+[project.urls]
+Homepage = "https://github.com/PentagonToy/StackNordic"
+Documentation = "https://github.com/PentagonToy/StackNordic/blob/main/docs/README.md"
+Issues = "https://github.com/PentagonToy/StackNordic/issues"
+Source = "https://github.com/PentagonToy/StackNordic"
+Changelog = "https://github.com/PentagonToy/StackNordic/blob/main/CHANGELOG.md"
+
+[project.scripts]
+stacknordic = "stacknordic.cli:main"
+
+[dependency-groups]
+dev = [
+    "pytest>=8,<10",
+    "ruff>=0.13,<1",
 ]
 
 [tool.hatch.build.targets.wheel]
