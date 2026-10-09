@@ -252,3 +252,21 @@ def test_generates_foundation_boundary_addressing(tmp_path: Path) -> None:
 def test_rejects_invalid_worker_count(n_jobs: int) -> None:
     with pytest.raises(ValueError, match="n_jobs"):
         workers(n_jobs, 2)
+
+
+def test_reconstructs_zero_time_into_new_destination(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    case_dir = _case(tmp_path)
+    output_dir = tmp_path / "reconstructed"
+
+    def execute(command: tuple[str, ...]) -> subprocess.CompletedProcess[str]:
+        # OpenFOAM excludes time zero unless explicitly enabled.
+        if "-withZero" in command:
+            stage = Path(command[command.index("-case") + 1])
+            _write_header(stage / "0" / "U")
+        return subprocess.CompletedProcess(command, 0, "ok")
+
+    monkeypatch.setattr(reconstruction, "_execute", execute)
+    result = reconstruction.reconstruct(case_dir=case_dir, output_dir=output_dir, times=[0.0], n_jobs=1)
+    assert result.reconstructed_times == (0.0,)
+    assert (output_dir / "0" / "U").is_file()
+    assert (case_dir / "processor0" / "0" / "U").is_file()

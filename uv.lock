@@ -186,6 +186,20 @@ wheels = [
 ]
 
 [[package]]
+name = "hedgehogs"
+version = "0.0.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "ipython" },
+    { name = "matplotlib" },
+    { name = "rich" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/f7/0d/a1365808cc003d1e8fec1545024aad404989df0e9befac4b0aebc521ac8b/hedgehogs-0.0.1.tar.gz", hash = "sha256:73a3ffba8f03a59fc13348567b1820d2afd5844d21d626b2c419e07243edd5e6", size = 339004, upload-time = "2026-10-08T10:39:09.63Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/d4/98/e46e6be9832dedca3bf30cc043e7d7b752a9280de69ee66cc1f5977da35f/hedgehogs-0.0.1-py3-none-any.whl", hash = "sha256:f224360ee99c45a671d9d574aad4b7a38297a3fcc44c357c7fa295e173b919e0", size = 50011, upload-time = "2026-10-08T10:39:06.764Z" },
+]
+
+[[package]]
 name = "iniconfig"
 version = "2.3.0"
 source = { registry = "https://pypi.org/simple" }
@@ -417,20 +431,6 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/c8/db/35e1c2d38b04cbd5b731f9d71495e055e813197669d22b612f11748d2ff9/numpy-2.5.3-cp312-cp312-win32.whl", hash = "sha256:bf63afbe037eb5d2fe87fbcc7778e61da53ebaf21d938a4515aa73b62532a5d4", size = 6133378, upload-time = "2026-09-06T16:24:51.915Z" },
     { url = "https://files.pythonhosted.org/packages/3c/a1/accf6d4f0c80c5d9ba9735d6b1550e444180599f34dec69ca01360f717ad/numpy-2.5.3-cp312-cp312-win_amd64.whl", hash = "sha256:0a59a421a32580a009e8a1751345bf829631b990dc1794b80514ab722b435def", size = 12567828, upload-time = "2026-09-06T16:24:54.255Z" },
     { url = "https://files.pythonhosted.org/packages/22/43/1764aff32e4652526ae2f71fa8b3efd8d25c8a3d6926914454e47138ed1e/numpy-2.5.3-cp312-cp312-win_arm64.whl", hash = "sha256:ccb32e0525d29e8b0572eb84c9a57af0e7a4e615726927506f55063c62414034", size = 10485432, upload-time = "2026-09-06T16:24:57.278Z" },
-]
-
-[[package]]
-name = "onsaemiro"
-version = "1.1.4"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "ipython" },
-    { name = "matplotlib" },
-    { name = "rich" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/8f/47/2070a20a8f136e9a737d5d3ec19c69b63e2beaed6a0622fea4b2fcc31b30/onsaemiro-1.1.4.tar.gz", hash = "sha256:ec5ae62a51afa38842570ed4e3088d06543ca0cf7c2e00e6544b89ccb4c24def", size = 25264, upload-time = "2026-09-27T04:11:01.299Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/7c/a3/5f532efa75275a873f57592451d369454a77a131bcb0a34cfb1f19a3e019/onsaemiro-1.1.4-py3-none-any.whl", hash = "sha256:b1d822f866a617805c7a0f7ada2a82cfc14222549643bd7484117d1f570b6f24", size = 21239, upload-time = "2026-09-27T04:10:59.98Z" },
 ]
 
 [[package]]
@@ -730,9 +730,9 @@ source = { editable = "." }
 dependencies = [
     { name = "cantera" },
     { name = "h5py" },
+    { name = "hedgehogs" },
     { name = "numpy", version = "2.4.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.12'" },
     { name = "numpy", version = "2.5.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12'" },
-    { name = "onsaemiro" },
     { name = "scipy", version = "1.17.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.12'" },
     { name = "scipy", version = "1.18.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12'" },
 ]
@@ -747,8 +747,8 @@ dev = [
 requires-dist = [
     { name = "cantera", specifier = ">=3.1,<4" },
     { name = "h5py", specifier = ">=3.12,<4" },
+    { name = "hedgehogs", specifier = ">=0.0.1" },
     { name = "numpy", specifier = ">=2,<3" },
-    { name = "onsaemiro", specifier = ">=1.0.5" },
     { name = "scipy", specifier = ">=1.14,<2" },
 ]
 

@@ -198,6 +198,8 @@ def _command(
     collated: bool,
 ) -> tuple[str, ...]:
     command = ["reconstructPar", "-case", str(case_dir), "-time", time_name]
+    if float(time_name) == 0.0:
+        command.append("-withZero")
     if collated:
         command.extend(("-fileHandler", "collated"))
     if fields is not None:

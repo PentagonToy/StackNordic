@@ -2,20 +2,18 @@
 
 from __future__ import annotations
 
-import onsaemiro as osm
+import hedgehogs as hdg
 
 
 def start_progress(total: int, description: str):
     """Create and immediately render a progress display."""
 
-    progress_type = getattr(osm, "Progress", None) or osm.ProgressBar
-    reporter = progress_type(total=total, desc=description)
+    reporter = hdg.Progress(total=total, desc=description)
     reporter.update(0)
     return reporter
 
 
 def finish_progress(reporter) -> None:
-    """Preserve the final display across supported Onsaemiro versions."""
+    """Preserve the final Hedgehogs progress display."""
 
-    finish = getattr(reporter, "finish", None)
-    finish() if finish is not None else reporter.close()
+    reporter.finish()

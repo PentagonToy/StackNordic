@@ -16,7 +16,7 @@ sno.Filtering(
 )
 ```
 
-| Parameter | Type | Default | Description |
+| Parameter | Type | Default | Meaning |
 | --- | --- | --- | --- |
 | `density` | `str \| None` | `None` | Density field used by Favre reductions. |
 | `mean` | `Sequence[str]` | `()` | Fields reduced by an unweighted spatial mean. |
@@ -88,11 +88,11 @@ dataset.downsample(
 
 The same operation is available as `sno.Dataset.downsample(dataset_dir=..., ...)` when the input dataset already exists on disk. `dataset_dir` may identify a native StackNordic dataset, a directory of StackNordic HDF5 snapshot packages, or one compiled StackNordic HDF5 series.
 
-| Parameter | Type | Default | Description |
+| Parameter | Type | Default | Meaning |
 | --- | --- | --- | --- |
-| `dataset_dir` | `str \| Path` | required for class call | Native dataset directory, snapshot-package directory or compiled HDF5 series. |
-| `factor` | `tuple[int, int, int]` | required | Output stride in public `(x, y, z)` order. |
-| `filtering` | `sno.Filtering` | required | Physical field-reduction contract. |
+| `dataset_dir` | `str \| Path` | Required for class call | Native dataset directory, snapshot-package directory or compiled HDF5 series. |
+| `factor` | `tuple[int, int, int]` | Required | Output stride in public `(x, y, z)` order. |
+| `filtering` | `sno.Filtering` | Required | Physical field-reduction contract. |
 | `output_dir` | `str \| Path \| None` | `None` | Native StackNordic dataset destination. Mutually exclusive with `output_file`. |
 | `output_file` | `str \| Path \| None` | `None` | Self-describing compiled HDF5 destination. Mutually exclusive with `output_dir`. |
 | `fields` | `Mapping[str, str] \| None` | `None` | Logical output fields mapped to HDF5 paths. Required with `output_file`. |
@@ -102,7 +102,7 @@ The same operation is available as `sno.Dataset.downsample(dataset_dir=..., ...)
 | `dtype` | `"float32" \| "float64"` | `"float32"` | Stored output precision. |
 | `compression` | `None \| "lzf" \| "gzip"` | `"lzf"` | HDF5 compression used with `output_file`. |
 | `n_jobs` | `int \| None` | `None` | Concurrent snapshots. `-1` is bounded by work, CPUs and estimated memory. |
-| `progress` | `bool` | `False` | Show an Onsaemiro progress display. |
+| `progress` | `bool` | `False` | Show a Hedgehogs progress display. |
 | `overwrite` | `bool` | `False` | Replace an existing output only after the new dataset completes. |
 
 ```python

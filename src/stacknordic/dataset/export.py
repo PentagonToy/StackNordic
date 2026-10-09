@@ -23,7 +23,6 @@ from ..openfoam.io import (
     FieldData,
     OpenFOAMDecodeError,
     collated_blocks,
-    read_field,
     read_field_payload,
     read_label_payload,
 )
@@ -662,14 +661,17 @@ def _write_reconstructed_snapshot(
         path = case_dir / time_name / field_name
         if not path.is_file():
             _error(f"field {field_name!r} is missing at t={time_name}", FileNotFoundError)
-        data = read_field(path, cell_count=global_count)
-        if data.values.ndim == 0:
-            if global_count is None:
-                _error(
-                    f"uniform field {field_name!r} cannot establish the global cell count; "
-                    "place a nonuniform field first"
-                )
-            data = read_field(path, cell_count=global_count)
+        payload = path.read_bytes()
+        if global_count is None and re.search(rb"\binternalField\s+uniform\b", payload):
+            source = _Source(case_dir, 0, 0, False)
+            labels = (
+                read_label_payload(_mesh_file(source, time_value, name).read_bytes())
+                for name in ("owner", "neighbour")
+            )
+            global_count = max(int(values.max(initial=-1)) for values in labels) + 1
+            if global_count <= 0:
+                _error(f"mesh at t={time_name} cannot establish the global cell count")
+        data = read_field_payload(payload, cell_count=global_count)
         _validate_components(field_name, output_names, data)
         count = data.values.shape[0]
         global_count = count if global_count is None else global_count

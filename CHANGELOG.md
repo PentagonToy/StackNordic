@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Replace Onsaemiro with Hedgehogs for progress reporting, preserving the final display in terminals and notebooks.
+
 ## 0.1.0 - 2026-09-27
 
 - Reconstruct decomposed OpenFOAM.com and OpenFOAM Foundation cases from Python or the command line.

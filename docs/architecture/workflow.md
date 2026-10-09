@@ -17,7 +17,7 @@ The dataset manifest records physical time, layout, component order, dtype, coor
 
 ## Reduction rules
 
-| Quantity | Default declared reduction |
+| Quantity | Reduction declared by the flow or combustion preset |
 | --- | --- |
 | Density and pressure | Arithmetic block mean; equivalent to a volume mean on a uniform Cartesian grid |
 | Velocity, temperature, progress variable and species mass fraction | Favre mean when density is available |
@@ -33,3 +33,5 @@ Box reduction trims incomplete blocks at the upper end of each axis. A filtered 
 ## Execution
 
 Parallel work is bounded by selected work, available CPUs, and estimated memory. Temporary data remains beside its destination and is removed after success or failure.
+
+Operations with `progress=True` report completed tasks or chunks through Hedgehogs. Failed operations retain the completed count; they do not report full completion.

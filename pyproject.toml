@@ -27,7 +27,7 @@ dependencies = [
     "cantera>=3.1,<4",
     "h5py>=3.12,<4",
     "numpy>=2,<3",
-    "onsaemiro>=1.0.5",
+    "hedgehogs>=0.0.1",
     "scipy>=1.14,<2",
 ]
 

@@ -511,3 +511,18 @@ def test_each_time_selects_its_own_complete_decomposition(tmp_path: Path) -> Non
     np.testing.assert_array_equal(
         np.fromfile(tmp_path / "dataset/data/P_id001.dat", "float32"), [300, 400]
     )
+
+
+def test_exports_uniform_initial_fields_using_mesh_cell_count(tmp_path: Path) -> None:
+    case = _case(tmp_path)
+    mesh = case / "constant/polyMesh"
+    mesh.mkdir(parents=True)
+    for name, labels in (("owner", [0, 0]), ("neighbour", [1])):
+        (mesh / name).write_bytes(_labels(labels).replace(b"cellProcAddressing", name.encode()))
+    (case / "0").mkdir()
+    (case / "0/U").write_text(_header("volVectorField", "U") + "internalField uniform (1 0 0);\n")
+    (case / "0/p").write_text(_header("volScalarField", "p") + "internalField uniform 2;\n")
+    output = tmp_path / "exported"
+    sno.Dataset.export(case_dir=case, output_dir=output, fields={"U": ("Ux", "Uy", "Uz"), "p": "p"}, times=[0.0], dtype="float32", n_jobs=1)
+    assert np.fromfile(output / "data/Ux_id000.dat", dtype="float32").tolist() == [1, 1]
+    assert np.fromfile(output / "data/p_id000.dat", dtype="float32").tolist() == [2, 2]
